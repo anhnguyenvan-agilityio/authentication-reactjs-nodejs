@@ -7,10 +7,14 @@ class App extends Component {
   }
   googleResponse = (response) => {
     console.log("==>", response);
-    const tokenBlob = new Blob([JSON.stringify({ access_token: response.accessToken }, null, 2)], { type: 'application/json' });
     const options = {
       method: 'POST',
-      body: tokenBlob,
+      body: JSON.stringify({
+        access_token: response.accessToken
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
       mode: 'cors',
       cache: 'default'
     };
@@ -20,7 +24,7 @@ class App extends Component {
         if (token) {
           // this.setState({ isAuthenticated: true, user, token })
           console.log('Login SUCCESS');
-          console.log(token);
+          console.log(user);
         }
       });
     })

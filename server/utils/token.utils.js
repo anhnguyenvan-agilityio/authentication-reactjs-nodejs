@@ -11,7 +11,10 @@ var createToken = function (auth) {
 module.exports = {
   generateToken: function (req, res, next) {
     console.log('req.auth', req.auth);
-    req.token = createToken(req.auth);
+    console.log()
+    const token = createToken(req.auth);
+    req.token = token;
+    req.user.token = token;
     return next();
   },
   sendToken: function (req, res) {
